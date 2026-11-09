@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universo UFC - Anderson Silva</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Ajustes específicos para deixar o layout de card único proporcional e bonito */
+        .vitrine {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+        .lutador-destaque {
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .lutador-img-grande {
+            width: 100%;
+            max-width: 450px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        .lutador-destaque.ativo .lutador-img-grande {
+            transform: scale(1.02);
+        }
+        .texto-completo {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            text-align: justify;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header obrigatório com navegação integrada -->
+    <header class="main-header">
+        <nav class="menu">
+            <a class="link ativo-menu" href="index.html">Home</a>
+            <a class="link" href="galeria.html">Galeria</a>
+            <a class="link" href="chat.html">Chat</a>
+            <a class="link" href="cadastro.html">Cadastro</a>
+            <a class="link" href="login.html">Login</a>
+        </nav>          
+    </header>
+
+    <!-- Main e Section integrados com foco no card único expandido -->
+    <main>
+        <section id="vitrine-lutadores" class="vitrine"> 
+
+            <article class="lutador lutador-destaque">
+                <img src="download (1).jfif" alt="Anderson Silva" class="lutador-img-grande">
+                <h2>Anderson "The Spider" Silva</h2>
+                
+                <div class="texto-completo">
+                    <p>Anderson Silva é amplamente considerado um dos maiores lutadores de todos os tempos das artes marciais mistas. O brasileiro dominou completamente a categoria dos pesos-médios do UFC, estabelecendo o recorde histórico de maior sequência de vitórias consecutivas na organização, com 16 triunfos seguidos, além de cravar o segundo maior número de defesas de cinturão consecutivas, totalizando 10 combates com título defendido com sucesso.</p>
+                    <p>Sua precisão cirúrgica na trocação de golpes, aliada a esquivas impressionantes e joelhadas voadoras cinematográficas, transformaram a forma como o esporte é praticado e assistido no mundo todo, consolidando seu nome na calçada da fama do Ultimate Fighting Championship.</p>
+                </div>
+
+                <form action="#" class="form-perfil">
+                    <button type="button">Ver Perfil Completo</button>
+                </form>
+            </article>
+
+        </section>
+    </main>
+
+    <!-- Footer obrigatório com a entidade de copyright -->
+    <footer class="main-footer">
+        <p>&copy; Desenvolvido por Matheus I - 2026 - Curitiba</p>
+    </footer>
+
+    <script>
+        const cards = document.querySelectorAll('.lutador');
+
+        cards.forEach(card => {
+            card.addEventListener('click', (e) => {
+                if (e.target.tagName === 'BUTTON') return;
+
+                cards.forEach(c => {
+                    if (c !== card) c.classList.remove('ativo');
+                });
+                
+                card.classList.toggle('ativo');
+            });
+        });
+    </script>
+</body>
+</html>

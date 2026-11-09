@@ -1,0 +1,159 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #0b0f19;
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.main-header {
+    width: 100%;
+    background-color: #0b0f19;
+    border-bottom: 2px solid #1e293b;
+}
+
+.menu {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 20px 0;
+    background-color: #0b0f19;
+    border-bottom: 2px solid #010002; /* Linha roxa na base do menu */
+}
+
+.link {
+    color: #0685a5;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.link:hover {
+    color: #0a4139;
+}
+
+.ativo-menu {
+    color: #a855f7 !important; /* Roxo para a aba ativa */
+}
+
+
+.container-chat {
+    flex: 1;
+    max-width: 800px;
+    width: 90%;
+    margin: 40px auto;
+    background-color: #111827;
+    border: 2px solid #00d2ff;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+
+.janela-mensagens {
+    flex: 1;
+    padding: 20px;
+    min-height: 400px;
+    max-height: 500px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: #0f172a;
+}
+
+/* Estilização da Mensagem (Estilo Balão) */
+.mensagem {
+    background-color: #1e293b;
+    color: #f3f4f6;
+    padding: 12px 18px;
+    border-radius: 18px 18px 18px 0px;
+    max-width: 70%;
+    align-self: flex-start;
+    line-height: 1.4;
+    font-size: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    border: 1px solid #334155;
+    animation: surgimento 0.3s ease-out;
+}
+
+@keyframes surgimento {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.formulario-envio {
+    display: flex;
+    padding: 15px;
+    background-color: #111827;
+    border-top: 1px solid #1e293b;
+    gap: 10px;
+}
+
+.formulario-envio input[type="text"] {
+    flex: 1;
+    background-color: #1e293b;
+    border: 1px solid #4b5563;
+    border-radius: 8px;
+    padding: 12px 16px;
+    color: #ffffff;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.formulario-envio input[type="text"]:focus {
+    border-color: #184d58;
+}
+
+.formulario-envio button {
+    background-color: #e5e5e6;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 0 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.formulario-envio button:hover {
+    background-color: #ffffff;
+}
+
+.formulario-envio button:active {
+    transform: scale(0.98);
+}
+
+/* ==========================================================================
+   Footer (Rodapé)
+   ========================================================================== */
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #6b7280;
+    font-size: 0.9rem;
+    background-color: #0b0f19;
+    border-top: 1px solid #1e293b;
+    margin-top: auto;
+}

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <nav class="menu">
+            <a class="link" href="index.html">Home</a>
+            <a class="link" href="galeria.html">Galeria</a>
+            <a class="link" href="chat.html">Chat</a>
+            <a class="link ativo-menu" href="cadastro.html">Cadastro</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container-box">
+            <h2>Cadastro</h2>
+            
+            <div style="display: flex; flex-direction: column; gap: 20px; width: 100%;">
+                <div class="form-group">
+                    <label for="usuario">Nome do usuário</label>
+                    <input type="text" id="usuario" placeholder="Digite seu nome">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" placeholder="Digite seu e-mail">
+                </div>
+
+                <div class="form-group">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" placeholder="Digite sua senha">
+                    <p>A senha deve conter pelo menos 6 caracteres.</p>
+                </div>
+
+                <button class="btn-enviar" onclick="validarDados()">Enviar</button>
+                
+                <div style="text-align: center; margin-top: 10px;">
+                    <p style="font-size: 14px; color: #8a8d93;">
+                        Já tem uma conta? 
+                        <a href="login.html" style="color: #ff1a1a; text-decoration: none; font-weight: bold; margin-left: 5px;">Fazer Login</a>
+                    </p>
+                </div>
+
+                <div id="resposta" style="text-align: center; font-weight: bold; margin-top: 10px;"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; Desenvolvido por Matheus I - 2026 Curitiba</p>
+    </footer>
+
+    <script>
+        async function validarDados() {
+            const usuarioEntrada = document.querySelector('#usuario');
+            const emailEntrada = document.querySelector('#email');
+            const senhaEntrada = document.querySelector('#senha');
+            const resposta = document.querySelector('#resposta');
+
+            const usuarioDigitado = usuarioEntrada.value.trim();
+            const emailDigitado = emailEntrada.value.trim();
+            const senhaDigitada = senhaEntrada.value.trim();
+
+            if (!usuarioDigitado || !emailDigitado || !senhaDigitada) {
+                resposta.innerText = 'Preencha todos os campos antes de enviar!';
+                resposta.style.color = '#ef4444';
+                return;
+            }
+
+            resposta.innerText = 'Aguarde 10 segundos, cadastrando no servidor...';
+            resposta.style.color = '#f59e0b';
+
+            try {
+                const respostaBe = await fetch('http://localhost:3000/cadastro', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        usuario: usuarioDigitado,
+                        email: emailDigitado,
+                        senha: senhaDigitada
+                    })
+                });
+
+                const dados = await respostaBe.json();
+
+                if (!respostaBe.ok) {
+                    resposta.innerText = `${dados.erro}`;
+                    resposta.style.color = '#ef4444';
+                    return;
+                }
+
+                localStorage.setItem('usuarioLogado', usuarioDigitado);
+
+                resposta.innerText = `${dados.mensagem}. Redirecionando para o chat...`;
+                resposta.style.color = '#10b981';
+
+                usuarioEntrada.value = '';
+                emailEntrada.value = '';
+                senhaEntrada.value = '';
+
+                setTimeout(() => {
+                    window.location.href = 'chat.html';
+                }, 1500);
+
+            } catch (erro) {
+                console.error(erro);
+                resposta.innerText = 'Erro ao conectar com o servidor!!';
+                resposta.style.color = '#ef4444';
+            }
+        }
+    </script>
+</body>
+</html>

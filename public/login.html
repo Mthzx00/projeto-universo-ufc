@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <nav class="menu">
+            <a class="link" href="index.html">Home</a>
+            <a class="link" href="galeria.html">Galeria</a>
+            <a class="link" href="chat.html">Chat</a>
+            <a class="link" href="cadastro.html">Cadastro</a>
+        </nav>          
+    </header>
+
+    <main>
+        <div class="container-box">
+            <h2>Login</h2>
+            
+            <div style="display: flex; flex-direction: column; gap: 20px; width: 100%;">
+                <div class="form-group">
+                    <label for="loginEmail">E-mail</label>
+                    <input type="email" id="loginEmail" placeholder="Digite seu e-mail">
+                </div>
+
+                <div class="form-group">
+                    <label for="loginSenha">Senha</label>
+                    <input type="password" id="loginSenha" placeholder="Digite sua senha">
+                </div>
+
+                <button class="btn-enviar" id="btnLogin">Enviar</button>
+                <div id="mensagemLogin" style="text-align: center; font-weight: bold; margin-top: 10px;"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; Desenvolvido por Matheus I - 2026 Curitiba</p>
+    </footer>
+
+    <script>
+        const btnLogin = document.querySelector('#btnLogin');
+        const mensagemLogin = document.querySelector('#mensagemLogin');
+
+        btnLogin.addEventListener('click', async () => {
+            const emailEntrada = document.querySelector('#loginEmail');
+            const senhaEntrada = document.querySelector('#loginSenha');
+            
+            const email = emailEntrada.value;
+            const senha = senhaEntrada.value;
+
+            if (!email || !senha) {
+                mensagemLogin.innerText = 'Preencha todos os campos antes de enviar!';
+                mensagemLogin.style.color = '#ef4444';
+                return;
+            }
+
+            try {
+                const respostaBe = await fetch('http://localhost:3000/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email: email, senha: senha })
+                });
+
+                const dados = await respostaBe.json();
+
+                if (!respostaBe.ok) {
+                    mensagemLogin.innerText = `${dados.erro}`;
+                    mensagemLogin.style.color = '#ef4444';
+                    return;
+                }
+
+                // CORREÇÃO: Salva o usuário no navegador para o chat liberar a entrada
+                localStorage.setItem('usuarioLogado', dados.usuario);
+
+                mensagemLogin.innerText = `${dados.mensagem}: ${dados.usuario} entrando no chat`;
+                mensagemLogin.style.color = '#10b981';
+                
+                emailEntrada.value = '';
+                senhaEntrada.value = '';
+
+                // CORREÇÃO: Redireciona o usuário direto para o chat depois de 1,5 segundos
+                setTimeout(() => {
+                    window.location.href = 'chat.html';
+                }, 1500);
+                
+            } catch (erro) {
+                console.error('Erro na requisição:', erro);
+                mensagemLogin.innerText = 'Erro ao conectar com o servidor!!';
+                mensagemLogin.style.color = '#ef4444';
+            }
+        });
+    </script>
+</body>
+</html>

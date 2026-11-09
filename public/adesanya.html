@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universo UFC - Perfil do Lutador</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Padronização e Correção do Layout das páginas de Perfil */
+        main {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            min-height: calc(100vh - 160px);
+            justify-content: flex-start;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .perfil-wrapper {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .fighter-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            width: 100%;
+        }
+        
+        .box-info {
+            background-color: #141414;
+            border: 2px solid #ff1a1a;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.8);
+        }
+
+        .box-info h2 {
+            font-size: 26px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+            color: #ff1a1a;
+            letter-spacing: 1px;
+        }
+
+        .box-info p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #e0e0e0;
+        }
+
+        .cartel-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .cartel-item {
+            background-color: #0f0f0f;
+            border: 1px solid #333;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .cartel-numero {
+            font-size: 28px;
+            font-weight: bold;
+            display: block;
+        }
+
+        .vitorias { color: #10b981; }
+        .derrotas { color: #ef4444; }
+        .empates { color: #f59e0b; }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            margin-top: 15px;
+            border: 1px solid #333;
+            background-color: #000;
+        }
+
+        .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        @media (max-width: 800px) {
+            .cartel-grid {
+                grid-template-columns: 1fr;
+            }
+            .box-info {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <nav class="menu">
+            <a class="link" href="index.html">Home</a>
+            <a class="link" href="galeria.html">Galeria</a>
+            <a class="link" href="chat.html">Chat</a>
+            <a class="link" href="cadastro.html">Cadastro</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="perfil-wrapper">
+            <div class="fighter-container">
+                
+                <div class="box-info" style="text-align: center;">
+                    <img src="ADESANYA_ISRAEL_03-28.avif" alt="Israel Adesanya" style="width: 100%; max-width: 220px; height: 220px; object-fit: cover; border-radius: 50%; border: 3px solid #ff1a1a; margin-bottom: 20px; box-shadow: 0 0 20px rgba(255, 26, 26, 0.5);">
+                    <h1 style="font-size: 36px; color: #fff; letter-spacing: 1px;">Israel Adesanya</h1>
+                    <p style="color: #8a8d93; font-weight: 500; margin-top: 5px;">Peso-Médio / Peso-Meio-Pesado</p>
+                </div>
+
+                <div class="box-info">
+                    <h2>História</h2>
+                    <p>Israel "The Last Stylebender" Adesanya é amplamente considerado o herdeiro legítimo do estilo plástico, genial e fluido de Anderson Silva. Nascido na Nigéria e radicado na Nova Zelândia, Adesanya trouxe para o MMA uma bagagem espetacular obtida no Kickboxing de altíssimo nível mundial. Com uma movimentação magnética, fintas imprevisíveis e contragolpes cirúrgicos de precisão milimétrica, ele dominou a categoria dos pesos-médios do UFC, construindo um dos reinados mais dominantes desde os tempos do próprio "Spider". O encontro entre criador e criatura ocorreu em 2019, em um duelo repleto de reverência e técnica refinada que marcou uma emocionante passagem de bastão geracional no esporte. Além de sua maestria técnica, a personalidade magnética e as performances teatrais de Adesanya o transformaram em uma das superestrelas mais globais do MMA moderno. </p>
+                </div>
+
+                <div class="box-info">
+                    <h2>Cartel Profissional</h2>
+                    <div class="cartel-grid">
+                        <div class="cartel-item">
+                            <span class="cartel-numero vitorias">24</span>
+                            <span class="link" style="font-size: 14px;">Vitórias</span>
+                        </div>
+                        <div class="cartel-item">
+                            <span class="cartel-numero derrotas">4</span>
+                            <span class="link" style="font-size: 14px;">Derrotas</span>
+                        </div>
+                        <div class="cartel-item">
+                            <span class="cartel-numero empates">00</span>
+                            <span class="link" style="font-size: 14px;">Empates/NC</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box-info">
+                    <h2>Luta Icônica</h2>
+                    <p><strong> Israel Adesanya vs Kelvin Gastelum (UFC 236) </strong></p>
+                    <p style="margin-top: 5px; font-size: 15px; color: #8a8d93;"> Uma das batalhas mais sangrentas e disputadas da história do esporte, onde Adesanya mostrou seu coração de campeão no último round.</p>
+                    
+                    <div class="video-wrapper">
+                        <video controls>
+                            <!-- Puxa o arquivo direto da pasta local onde o servidor consegue ler -->
+                            <source src="adesanya.mp4">
+                            Seu navegador não suporta a exibição de vídeos.
+                        </video>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; Desenvolvido por Matheus I - 2026 Curitiba</p>
+    </footer>
+
+</body>
+</html>

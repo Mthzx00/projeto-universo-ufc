@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universo UFC - Chat</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="main-header">
+        <nav class="menu">
+            <a class="link" href="index.html">Home</a>
+            <a class="link" href="galeria.html">Galeria</a>
+            <a class="link ativo-menu" href="chat.html">Chat</a>
+            <a class="link" href="cadastro.html">Cadastro</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container-box">
+            <h2 id="chat-titulo">Universo UFC - Chat</h2>
+            
+            <div class="chat-messages janela-mensagens">
+                <div class="msg-sistema">
+                    Fala, meu querido! Preparado para trocar uma ideia de campeão?
+                </div>
+            </div>
+
+            <form class="formulario-envio chat-input-group">
+                <input type="text" placeholder="Digite sua mensagem..." required />
+                <button type="submit" class="btn-enviar">Enviar</button>
+            </form>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; Desenvolvido por Matheus I - 2026 Curitiba</p>
+    </footer>
+
+    <script>
+        const usuarioLogado = localStorage.getItem('usuarioLogado');
+
+        if (!usuarioLogado) {
+            alert('Acesso negado! Por favor, realize o login ou cadastro para acessar o chat.');
+            window.location.href = 'cadastro.html';
+        } else {
+            const elementoTitulo = document.getElementById('chat-titulo');
+            if (elementoTitulo) {
+                elementoTitulo.textContent = `Universo UFC - Chat (${usuarioLogado})`;
+            }
+        }
+
+        const caixaChat = document.querySelector('.janela-mensagens');
+        const formEnvio = document.querySelector('.formulario-envio');
+        const inputMensagem = document.querySelector('.formulario-envio input');
+        const btnEnviar = document.querySelector('.formulario-envio button');
+
+        const historicoConversa = [];
+
+        function mensagemTela(autor, texto) {
+            const textoFinal = document.createElement('div');
+            
+            if (autor === 'Sistema' || autor === 'system') {
+                textoFinal.className = 'msg-sistema';
+                textoFinal.textContent = texto;
+            } else {
+                textoFinal.className = 'msg-balao';
+                textoFinal.textContent = `${autor}: ${texto}`;
+                if (autor === usuarioLogado) {
+                    textoFinal.classList.add('minha-msg');
+                }
+            }
+            
+            caixaChat.appendChild(textoFinal);
+            caixaChat.scrollTop = caixaChat.scrollHeight;
+        }
+
+        formEnvio.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const textoMensagem = inputMensagem.value.trim();
+
+            if (!textoMensagem) return;
+
+            mensagemTela(usuarioLogado, textoMensagem);
+            historicoConversa.push({ role: "user", content: textoMensagem });
+
+            inputMensagem.value = '';
+            btnEnviar.disabled = true;
+
+            try {
+                const respostaServidor = await fetch('/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ historico: historicoConversa })
+                });
+
+                const dados = await respostaServidor.json();
+                if (!respostaServidor.ok) {
+                    mensagemTela('system', dados.erro);
+                    return;
+                }
+
+                mensagemTela('Anderson', dados.resposta);
+            } catch (erro) {
+                mensagemTela('Sistema', 'Erro ao conectar com o servidor');
+            } finally {
+                btnEnviar.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
