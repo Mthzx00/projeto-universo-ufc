@@ -322,36 +322,30 @@ input {
     width: 100%;
 }
 
-@media (max-width:768px){
+@media (max-width: 768px) {
     .container-box {
-        display: flex !important;
-        flex-direction: column !important;
-        box-sizing: border-box;
         padding: 20px;
         gap: 15px;
     }
     .chat-messages {
-        flex: 1;
-        min-height: 250px;
-        overflow-y: auto;
+        min-height: 200px;
     }
     .chat-input-group {
         display: flex !important;
         flex-direction: column !important;
         gap: 12px !important;
         width: 100% !important;
-        margin-top: auto;
-        box-sizing: border-box;
     }
     .chat-input-group input {
         width: 100% !important;
         flex: none !important;
+        display: block !important;
     }
     .chat-input-group button.btn-enviar {
         width: 100% !important;
         max-width: none !important;
-        padding: 14px 20px !important;
         margin: 0 !important;
+        display: block !important;
     }
 }
 
@@ -359,5 +353,4 @@ main .container-box.perfil-lutador-ativo {
     max-height: none !important;
     height: auto !important;
     overflow: visible !important;
-    display: block !important;
 }
